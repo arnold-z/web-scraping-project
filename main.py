@@ -67,6 +67,22 @@ def sizeScraper():
             print(size_elements)
             break
 
+def nameScraper():
+    # GET request
+    r = requests.get(link)
+    # Retrieves and and parses HTML code
+    soup = BeautifulSoup(r.content, 'html.parser') 
+    # Finds all possible instances of name HTML element
+    s = soup.find('div', class_="product-details-group description")
+    content = s.find_all('strong')
+
+    name_list = []
+
+    for c in content:
+        name_list.append(c.text)
+
+    print(name_list[0])
+
 
 if search_query == "-price":
     priceScraper()
@@ -74,3 +90,5 @@ elif search_query == "-color":
     colorScraper()
 elif search_query == "-size":
     sizeScraper()
+elif search_query == "-name":
+    nameScraper()
