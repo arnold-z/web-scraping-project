@@ -1,5 +1,5 @@
 # Baseball Glove Web Scraper ⚾️
-Program that searches for a baseball's glove features from "justballgloves.com"
+Python script that searches for a baseball's glove features from "justballgloves.com"
 
 ## Dependencies
 
@@ -7,8 +7,6 @@ Program that searches for a baseball's glove features from "justballgloves.com"
 ```
 pip install requests
 ```
-- [sys](https://docs.python.org/3/library/sys.html)
-
 - [smtplib](https://docs.python.org/3/library/smtplib.html)
 
 ```
@@ -18,6 +16,7 @@ pip install smtplib
 ```
 pip install BeautifulSoup
 ```
+- [sys](https://docs.python.org/3/library/sys.html) (Downloaded with Python)
 
 ## Commands and Arguments to Run
 
@@ -64,5 +63,9 @@ To specify which justballgloves.com link, do:
 ```
 python main.py -all -Y https://www.justballgloves.com/product/wilson-a2000-1786-11-5--baseball-glove--wbw100390115/34681/#attr=255502
 ```
+```
+python main.py -price -Y https://www.justballgloves.com/product/wilson-a2000-1786-11-5--baseball-glove--wbw100390115/34681/#attr=255502
+```
+
 
   
