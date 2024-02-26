@@ -1,4 +1,4 @@
-# Baseball Glove Web Scraper
+# Baseball Glove Web Scraper ⚾️
 Program that searches for a baseball's glove features from "justballgloves.com"
 
 ## Dependencies
