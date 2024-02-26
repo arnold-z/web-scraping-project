@@ -52,6 +52,10 @@ To send automatic emails, do:
 ```
 -Y
 ```
+To opt out, do:
+```
+-N
+```
 
 ### Third argument (link)
 To specify which justballgloves.com link, do:
