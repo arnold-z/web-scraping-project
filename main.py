@@ -12,7 +12,6 @@ def priceScraper():
     # GET request
     r = requests.get(link)
     # Retrieves and and parses HTML code
-    website_content = r.content
     soup = BeautifulSoup(r.content, 'html.parser') 
     # Finds HTML div with "price" class 
     s = soup.find('div', class_="price")
@@ -24,13 +23,12 @@ def priceScraper():
     for c in content:
        price_list.append(c.text)
     # Prints the price of item
-    print("The price is: " + price_list[0])
+    print("Price: " + price_list[0])
 
 def colorScraper():
     # GET request
     r = requests.get(link)
     # Retrieves and and parses HTML code
-    website_content = r.content
     soup = BeautifulSoup(r.content, 'html.parser') 
     # Finds all 'li' elements under the HTMl div where the color should be
     s = soup.find('div', class_="product-details-group-more")
@@ -48,9 +46,31 @@ def colorScraper():
         if (text_elements.startswith('Colorway: ')):
             print(text_elements)
     
+def sizeScraper():
+    # GET request
+    r = requests.get(link)
+    # Retrieves and and parses HTML code
+    soup = BeautifulSoup(r.content, 'html.parser') 
+    # Finds all possible instances of size HTML element
+    s = soup.find('div', class_="product-details-group-more")
+    content = s.find_all('li')
+
+    size_list = []
+
+    for c in content:
+        size_list.append(c.text)
+
+    # Traverses possible HTML elements
+    # Checks if HTML element contains "Inch Length" and outputs if true
+    for size_elements in size_list:
+       if "Inch Length" in size_elements:
+            print(size_elements)
+            break
 
 
 if search_query == "-price":
     priceScraper()
 elif search_query == "-color":
     colorScraper()
+elif search_query == "-size":
+    sizeScraper()
