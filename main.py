@@ -1,10 +1,14 @@
 import requests
 import sys
+import smtplib
 from bs4 import BeautifulSoup
 
-# Stores the user's desired search query and website link
+# Stores the user's desired choices for program
 search_query = sys.argv[1]
-link = sys.argv[2]
+mailScrape = sys.argv[2]
+link = sys.argv[3]
+
+
 
 # Retrieves the HTML code for a certain website using the requests library
 # Formats the retrieved HTML code using the BeautifulSoup library
@@ -24,7 +28,7 @@ def priceScraper():
        price_list.append(c.text)
     # Prints the price of item
     final_price = price_list[0]
-    print("Price: " + final_price)
+    return final_price
 
 def colorScraper():
     # GET request
@@ -47,7 +51,7 @@ def colorScraper():
         if (color_elements.startswith('Colorway: ')):
             final_color = color_elements
             
-    print(final_color)
+    return final_color
     
 def sizeScraper():
     # GET request
@@ -69,7 +73,7 @@ def sizeScraper():
        if "Inch Length" in size_elements:
             final_size = size_elements
             break
-    print(final_size)
+    return final_size
 
 def nameScraper():
     # GET request
@@ -88,14 +92,36 @@ def nameScraper():
 
     # Outputs name of glove
     final_name = name_list[0]
-    print(final_name)
+    return final_name
 
+# Stores all web scraping into one variable
+def allScraper():
+    scrape = "\n" + "Baseball Glove Scraping Information: " + "\n" + nameScraper() + priceScraper() + colorScraper() + "\n" + sizeScraper() + "\n"
+    return scrape
 
+# Automatic mail delivery using SMTP library
+def mailUpdate():
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.starttls()
+    s.login("webscrapermail@gmail.com", "qiqd fobs rmqc hosz")
+    message = allScraper()
+    s.sendmail("webscrapermail@gmail.com", "webscrapermail@gmail.com", message)
+    s.quit()   
+
+# System arguments that decide output based off user's specifications
 if search_query == "-price":
-    priceScraper()
+    print(priceScraper())
 elif search_query == "-color":
-    colorScraper()
+    print(colorScraper())
 elif search_query == "-size":
-    sizeScraper()
+    print(sizeScraper())
 elif search_query == "-name":
-    nameScraper()
+    print(nameScraper()) 
+elif search_query == "-all":
+    print(allScraper())
+else:
+    print("Invalid search query. Please refer to the README file for help.")
+
+# E-mail update conditional
+if mailScrape == "-Y":
+    mailUpdate()
