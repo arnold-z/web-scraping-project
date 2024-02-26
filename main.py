@@ -23,7 +23,8 @@ def priceScraper():
     for c in content:
        price_list.append(c.text)
     # Prints the price of item
-    print("Price: " + price_list[0])
+    final_price = price_list[0]
+    print("Price: " + final_price)
 
 def colorScraper():
     # GET request
@@ -41,10 +42,12 @@ def colorScraper():
         color_list.append(c.text)
     
     # Traverses through color_list and finds the text element that contains the color
-    for text_elements in color_list:
+    for color_elements in color_list:
         # Uses .startswith() function to find the color HTML element
-        if (text_elements.startswith('Colorway: ')):
-            print(text_elements)
+        if (color_elements.startswith('Colorway: ')):
+            final_color = color_elements
+            
+    print(final_color)
     
 def sizeScraper():
     # GET request
@@ -64,8 +67,9 @@ def sizeScraper():
     # Checks if HTML element contains "Inch Length" and outputs if true
     for size_elements in size_list:
        if "Inch Length" in size_elements:
-            print(size_elements)
+            final_size = size_elements
             break
+    print(final_size)
 
 def nameScraper():
     # GET request
@@ -78,10 +82,13 @@ def nameScraper():
 
     name_list = []
 
+    # Appends possible HTML elements to name_list
     for c in content:
         name_list.append(c.text)
 
-    print(name_list[0])
+    # Outputs name of glove
+    final_name = name_list[0]
+    print(final_name)
 
 
 if search_query == "-price":
