@@ -9,6 +9,7 @@ pip install requests
 ```
 - [smtplib](https://docs.python.org/3/library/smtplib.html)
 
+**Edit line 875 of your smtp library to ```msg = _fix_eols(msg).encode('utf-8')```**
 ```
 pip install smtplib
 ```
