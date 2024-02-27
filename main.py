@@ -5,8 +5,9 @@ from bs4 import BeautifulSoup
 
 # Stores the user's desired choices for program system arguments
 search_query = sys.argv[1]
-mailScrape = sys.argv[2]
-link = sys.argv[3]
+mail_scrape = sys.argv[2]
+user_email = sys.argv[3]
+link = sys.argv[4]
 
 # Retrieves the HTML code for a certain website using the requests library
 # Formats the retrieved HTML code using the BeautifulSoup library
@@ -88,12 +89,16 @@ def allScraper():
 
 # Automatic mail delivery using SMTP library
 def mailUpdate():
-    s = smtplib.SMTP('smtp.gmail.com', 587)
-    s.starttls()
-    s.login("webscrapermail@gmail.com", "qiqd fobs rmqc hosz")
-    message = allScraper()
-    s.sendmail("webscrapermail@gmail.com", "webscrapermail@gmail.com", message)
-    s.quit()   
+    if user_email != "-N":
+        # Initialize session for email
+        s = smtplib.SMTP('smtp.gmail.com', 587)
+        s.starttls()
+        # Log in to web-scraper email
+        s.login("webscrapermail@gmail.com", "qiqd fobs rmqc hosz")
+        message = allScraper()
+        # Sends email to user
+        s.sendmail("webscrapermail@gmail.com", user_email, message)
+        s.quit()   
 
 # System arguments that decide output based off user's specifications
 if search_query == "-price":
@@ -110,5 +115,5 @@ else:
     print("Invalid search query. Please refer to the README file for help.")
 
 # E-mail update conditional
-if mailScrape == "-Y":
+if mail_scrape == "-Y":
     mailUpdate()
