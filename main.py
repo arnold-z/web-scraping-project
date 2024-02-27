@@ -3,22 +3,23 @@ import sys
 import smtplib
 from bs4 import BeautifulSoup
 
-# Stores the user's desired choices for program
+# Stores the user's desired choices for program system arguments
 search_query = sys.argv[1]
 mailScrape = sys.argv[2]
 link = sys.argv[3]
 
-
-
 # Retrieves the HTML code for a certain website using the requests library
 # Formats the retrieved HTML code using the BeautifulSoup library
-def priceScraper():
+def HTMLparse():
     # GET request
     r = requests.get(link)
     # Retrieves and and parses HTML code
     soup = BeautifulSoup(r.content, 'html.parser') 
+    return soup
+
+def priceScraper():
     # Finds HTML div with "price" class 
-    s = soup.find('div', class_="price")
+    s = HTMLparse().find('div', class_="price")
     # Stores all instances of 'span' element into price_list
     content = s.find_all('span')    
 
@@ -31,12 +32,8 @@ def priceScraper():
     return final_price
 
 def colorScraper():
-    # GET request
-    r = requests.get(link)
-    # Retrieves and and parses HTML code
-    soup = BeautifulSoup(r.content, 'html.parser') 
     # Finds all 'li' elements under the HTMl div where the color should be
-    s = soup.find('div', class_="product-details-group-more")
+    s = HTMLparse().find('div', class_="product-details-group-more")
     content = s.find_all('li')
     
     color_list = []
@@ -54,12 +51,7 @@ def colorScraper():
     return final_color
     
 def sizeScraper():
-    # GET request
-    r = requests.get(link)
-    # Retrieves and and parses HTML code
-    soup = BeautifulSoup(r.content, 'html.parser') 
-    # Finds all possible instances of size HTML element
-    s = soup.find('div', class_="product-details-group-more")
+    s = HTMLparse().find('div', class_="product-details-group-more")
     content = s.find_all('li')
 
     size_list = []
@@ -76,12 +68,7 @@ def sizeScraper():
     return final_size
 
 def nameScraper():
-    # GET request
-    r = requests.get(link)
-    # Retrieves and and parses HTML code
-    soup = BeautifulSoup(r.content, 'html.parser') 
-    # Finds all possible instances of name HTML element
-    s = soup.find('div', class_="product-details-group description")
+    s = HTMLparse().find('div', class_="product-details-group description")
     content = s.find_all('strong')
 
     name_list = []
