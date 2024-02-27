@@ -48,7 +48,7 @@ To do all, do:
 -all
 ```
 
-### Second argument (email)
+### Second argument (email feature)
 To send automatic emails, do:
 ```
 -Y
@@ -58,7 +58,18 @@ To opt out, do:
 -N
 ```
 
-### Third argument (link)
+### Third argument (user's desired email)
+If you chose "-Y" above, input:
+```
+*insert desired email*
+```
+
+If you chose "-N" above, input:
+```
+-N
+```
+
+### Fourth argument (link)
 To specify which justballgloves.com link, do:
 ```
 *insert link here*
@@ -66,10 +77,10 @@ To specify which justballgloves.com link, do:
 
 ### Examples
 ```
-python main.py -all -Y https://www.justballgloves.com/product/wilson-a2000-1786-11-5--baseball-glove--wbw100390115/34681/#attr=255502
+python main.py -all -Y *insert email here* *insert justballgloves.com link here*
 ```
 ```
-python main.py -price -Y https://www.justballgloves.com/product/wilson-a2000-1786-11-5--baseball-glove--wbw100390115/34681/#attr=255502
+python main.py -price -N -N *insert justballgloves.com link here*
 ```
 
 
